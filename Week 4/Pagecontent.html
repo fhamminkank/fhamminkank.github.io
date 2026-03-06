@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Content</title>
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+
+<style>
+
+   :root {
+    --text-main: #1a1a1a;
+    --text-muted: #666;
+    --accent: #004a99;
+    --bg: #ffffff;
+    --border: #eeeeee;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+section {
+    max-width: 700px; 
+    margin: 60px auto;
+    padding: 0 25px;
+}
+
+article {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+
+article::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    height: 20px;
+    width: 2px;
+    background-color: var(--accent);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 16px 0;
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+article > p {
+    font-size: 18px;
+    color: #444;
+    margin: 0;
+}
+
+
+article:hover h1 {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    section {
+        margin: 30px auto;
+    }
+    article::before {
+        left: -15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section>
+    <article>
+        <header>
+            <h1>Just Another Day</h1>
+            <p>Written by Christina on January 11th</p>
+        </header>
+        <p>This is my second blog entry, and I just wanted to check in on you.</p>
+    </article>
+
+    <article>
+        <header>
+            <h1>My First Blog Entry</h1>
+            <p>Written by Christina on January 10th</p>
+        </header>
+        <p>I'm so happy to write my first blog entry – yay!</p>
+    </article>
+</section>
+
+</body>
+</html>

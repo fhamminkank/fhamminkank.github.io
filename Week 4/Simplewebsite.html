@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple website - VNU International School</title>
+   
+     <link rel="icon" type="image/png" href="favicon-16x16.png">
+    
+<style>
+   
+    :root {
+        --primary: #002d5e;
+        --secondary: #f5f7fb;
+        --accent: #085094;
+        --text-dark: #2c2c2c;
+        --text-light: #666;
+        --white: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #faf3f3, #f5f7fb);
+        font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+
+
+    .navbar {
+        background: linear-gradient(90deg, #002d5e, #004a99);
+        color: white;
+        padding: 14px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      
+    }
+
+    .navbar h2 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 0.5px;
+    }
+
+    .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+    }
+
+   
+    section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px 80px;
+    }
+
+   
+    h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+        color: var(--primary);
+    }
+
+    header > p {
+        font-style: italic;
+        color: var(--text-light);
+        margin-top: 0;
+    }
+
+ 
+    article {
+        background-color: var(--white);
+        border-radius: 12px;
+        padding: 25px 30px;
+        margin-bottom: 35px;
+        max-width: 900px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 6px solid var(--accent);
+    }
+
+    article:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+
+    article > p {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+    }
+
+  
+    footer {
+        background: linear-gradient(90deg, #333, #111);
+        color: white;
+        text-align: center;
+        padding: 12px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        font-size: 14px;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+    }
+
+    footer p {
+        margin: 0;
+        opacity: 0.85;
+    }
+
+
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        article {
+            padding: 20px;
+        }
+
+        article > p {
+            font-size: 18px;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><strong>VNU-IS</strong></div>
+        <ul>
+
+            <li><a href="https://www.is.vnu.edu.vn/" target="_blank">Home</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+           
+        </ul>
+    </nav>
+
+    <section>
+        <article>
+            <header>
+                <h1>Just Another Day</h1>
+                <p>Written by Christina on January 11th</p>
+            </header>
+            <p>This is my second blog entry, and I just wanted to check in on you.</p>
+        </article>
+
+        <article>
+            <header>
+                <h1>My First Blog Entry</h1>
+                <p>Written by Christina on January 10th</p>
+            </header>
+            <p>I'm so happy to write my first blog entry – yay!</p>
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Minh Anh</p>
+    </footer>
+
+</body>
+</html>

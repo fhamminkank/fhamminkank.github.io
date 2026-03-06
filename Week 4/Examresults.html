@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Fundamentals Exam Result</title>
+
+    <style>
+        :root {
+    --primary: #334155;   
+    --secondary: #f8fafc; 
+    --border: #e2e8f0;     
+    --text: #0f172a;       
+    --success: #15803d;   
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 30px;
+    color: var(--primary);
+    border-left: 5px solid var(--primary);
+    padding-left: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+caption {
+    text-align: left;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+thead th {
+    background-color: var(--secondary);
+    color: var(--primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid var(--border);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+
+td:nth-child(1), 
+th:nth-child(1),
+td:nth-child(4),
+th:nth-child(4) {
+    text-align: center;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.score {
+    font-weight: 700;
+    color: var(--success);
+}
+
+.average {
+    background-color: var(--secondary);
+    padding: 15px;
+    border-radius: 6px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.average span {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+    .container { border: none; padding: 10px; }
+    h1 { font-size: 20px; }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Web Fundamentals Exam Result</h1>
+
+    <table>
+        <caption>Exam results of 05 participants</caption>
+
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Gosho</td>
+                <td>Goshev</td>
+                <td><span class="score">500</span></td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Tosho</td>
+                <td>Toshev</td>
+                <td><span class="score">500</span></td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Gencho</td>
+                <td>Genchev</td>
+                <td><span class="score">500</span></td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Draga</td>
+                <td>Draganova</td>
+                <td><span class="score">500</span></td>
+            </tr>
+            <tr>
+                <td>05</td>
+                <td>Gosho</td>
+                <td>Goshev</td>
+                <td><span class="score">500</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="average">
+        Average score from 05 participants:
+        <span>500</span>
+    </p>
+</div>
+
+</body>
+</html>

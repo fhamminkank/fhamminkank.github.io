@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P01_NavigationBar</title>
+
+  <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #f3f4f7; /* nền sáng dịu */
+        color: #2c2c2c;
+    }
+
+  
+    nav {
+        background-color: #ffffff; /* nền trắng */
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-right: 8px;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 16px 18px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #374151; /* xám đậm */
+        border-radius: 8px;
+        transition: background-color 0.25s, color 0.25s;
+    }
+
+    nav ul li a:hover {
+        background-color: #eef2ff; /* xanh nhạt */
+        color: #4338ca; /* xanh tím dịu */
+    }
+
+  
+    .content {
+        max-width: 900px;
+        margin: 48px auto;
+        background-color: #ffffff;
+        padding: 32px;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 30px;
+        color: #111827;
+        text-align: center;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #000000;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tutorials">Tutorials</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Chào mừng đến với bài tập P01</h1>
+        <p>
+            Đây là thanh điều hướng (Navigation Bar) được xây dựng bằng HTML5 Semantic
+            và CSS.
+        </p>
+    </div>
+
+</body>
+</html>

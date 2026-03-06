@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: #000; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow: hidden; 
+        }
+
+        /* Countdown Overlay */
+        #countdown-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, #1a2a44 0%, #05080a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .title {
+            color: #f1c40f;
+            font-size: clamp(2rem, 8vw, 5rem);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+            letter-spacing: 5px;
+        }
+
+        .timer-box {
+            background: #fff;
+            color: #1a2a44;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            font-weight: 900;
+        }
+
+        /* Background Canvas */
+        #canvas1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-container">
+        <h1 class="title">New Year Countdown</h1>
+        <div class="timer-box" id="timer">3</div>
+    </div>
+
+    <canvas id="canvas1"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas1');
+        const ctx = canvas.getContext('2d', { alpha: false }); // Tối ưu hiệu năng render
+        const timerElement = document.getElementById('timer');
+        const countdownContainer = document.getElementById('countdown-container');
+
+        let particlesArray = [];
+        const textSequence = ["HAPPY", "NEW YEAR", "2026", "PROSPERITY", "PEACE"];
+        let currentTextIndex = 0;
+        let animationId;
+
+        // Cấu hình màn hình
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            if (countdownContainer.style.display === 'none') {
+                initText(textSequence[currentTextIndex]);
+            }
+        });
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.baseX = x;
+                this.baseY = y;
+                this.size = 2;
+                this.color = color;
+                this.speed = (Math.random() * 0.05) + 0.05; // Tốc độ hội tụ
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+
+            update() {
+                // Di chuyển hạt về vị trí gốc (baseX, baseY)
+                this.x += (this.baseX - this.x) * this.speed;
+                this.y += (this.baseY - this.y) * this.speed;
+                
+                // Hiệu ứng rung nhẹ
+                this.x += Math.sin(Date.now() * 0.01) * 0.5;
+            }
+        }
+
+        function initText(text) {
+            particlesArray = [];
+            const tempCtx = canvas.getContext('2d');
+            
+            // Cài đặt font động dựa trên chiều rộng màn hình
+            let fontSize = Math.min(canvas.width / (text.length * 0.7), 120);
+            tempCtx.font = `900 ${fontSize}px Montserrat`;
+            tempCtx.textAlign = 'center';
+            tempCtx.textBaseline = 'middle';
+            
+            // Vẽ nháp để lấy dữ liệu điểm ảnh
+            tempCtx.fillStyle = 'white';
+            tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+            tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+            const data = tempCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const gap = 4; // Khoảng cách giữa các hạt (tăng lên nếu lag)
+
+            for (let y = 0; y < canvas.height; y += gap) {
+                for (let x = 0; x < canvas.width; x += gap) {
+                    const alpha = data[(y * canvas.width + x) * 4 + 3];
+                    if (alpha > 128) {
+                        const color = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                        particlesArray.push(new Particle(x, y, color));
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Tạo hiệu ứng đuôi mờ
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Logic đếm ngược
+        let timeLeft = 3;
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerElement.innerText = timeLeft;
+            } else {
+                clearInterval(countdown);
+                timerElement.innerText = "GO";
+                countdownContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    countdownContainer.style.display = 'none';
+                    startNewYearShow();
+                }, 800);
+            }
+        }, 1000);
+
+        function startNewYearShow() {
+            initText(textSequence[currentTextIndex]);
+            animate();
+
+            // Chuyển đổi chữ mỗi 3.5 giây
+            setInterval(() => {
+                currentTextIndex = (currentTextIndex + 1) % textSequence.length;
+                initText(textSequence[currentTextIndex]);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
