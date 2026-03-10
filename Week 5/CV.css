@@ -1,0 +1,10 @@
+div{
+    margin: 100px;
+    background-color: rgb(181, 126, 223);
+}
+img{
+     width: 150px;       
+  height: 150px;
+  object-fit: cover;  
+  border-radius: 50%;
+}
