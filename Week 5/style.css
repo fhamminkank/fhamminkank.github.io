@@ -1,195 +1,44 @@
-:root {
-            --primary: #1e3c72;
-            --accent: #2a5298;
-            --bg: #f4f6fb;
-            --card: #ffffff;
-            --text-dark: #2c2c2c;
-            --text-light: #666;
-        }
+/* Cơ bản */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; line-height: 1.6; }
+#wrap { width: 1000px; margin: 0 auto; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
 
-        * {
-            box-sizing: border-box;
-        }
+/* Header & Navigation */
+#header { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 2px solid #ffb6c1; }
+#logo img { height: 60px; }
 
-        body {
-            margin: 0;
-            background: linear-gradient(135deg, #eef2f7, var(--bg));
-            font-family: "Segoe UI", Arial, sans-serif;
-            color: var(--text-dark);
-        }
+#menu_top ul { list-style: none; display: flex; }
+#menu_top ul li { position: relative; }
+#menu_top ul li a { text-decoration: none; padding: 10px 15px; color: #d63384; font-weight: bold; display: block; }
+#menu_top ul li a:hover { background: #ffb6c1; color: white; }
 
-        .cv-container {
-            max-width: 1000px;
-            margin: 50px auto;
-            background: var(--card);
-            padding: 40px;
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-        }
+/* Dropdown menu */
+.level2 { display: none; position: absolute; background: #fff; border: 1px solid #ddd; min-width: 150px; flex-direction: column; z-index: 100; }
+.dropdown:hover .level2 { display: flex; }
 
-        /* ===== HEADER ===== */
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #e5e5e5;
-        }
+/* Welcome message */
+#welcome { background: #fff0f5; text-align: center; padding: 10px; color: #d63384; font-style: italic; }
 
-        figure {
-            margin: 0;
-            text-align: center;
-        }
+/* Layout chính */
+#center_content { display: flex; padding: 20px; gap: 20px; }
+#left { flex: 3; }
+#right { flex: 1; border-left: 1px solid #eee; padding-left: 20px; }
 
-        figure img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            object-position: 45% 100%;
-          
-             
-        }
+/* Danh mục sản phẩm */
+.title { color: #d63384; border-bottom: 2px solid #ffb6c1; padding-bottom: 5px; margin-bottom: 15px; font-size: 1.2rem; }
+.product { display: flex; margin-bottom: 20px; background: #fffafb; padding: 10px; border-radius: 5px; border: 1px solid #ffe4e1; }
+.product .img { margin-right: 15px; }
+.product .name { color: #b01756; margin-bottom: 5px; }
+.fake-btn { display: inline-block; background: #d63384; color: #fff; padding: 5px 15px; border-radius: 20px; cursor: pointer; margin-top: 10px; font-size: 0.9rem; }
+.fake-btn:hover { background: #b01756; }
 
-        figcaption {
-            margin-top: 8px;
-            font-size: 14px;
-            color: var(--text-light);
-        }
+/* Sidebar bên phải */
+.product_small { text-align: center; margin-bottom: 15px; }
+.product_small a { text-decoration: none; color: #333; }
+.menu_right { list-style: none; }
+.menu_right li { padding: 5px 0; border-bottom: 1px dashed #ddd; }
+.menu_right li a { text-decoration: none; color: #555; }
+.menu_right li a:hover { color: #d63384; padding-left: 5px; transition: 0.3s; }
 
-        .info h1 {
-            margin: 0;
-            font-size: 34px;
-            color: var(--primary);
-        }
-
-        .subtitle {
-            font-style: italic;
-            color: var(--text-light);
-            margin: 6px 0 10px;
-        }
-
-        .info p {
-            margin: 4px 0;
-        }
-
-        /* ===== SOCIAL LINKS ===== */
-        .social-links {
-            margin-top: 12px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            font-size: 28px;
-            color: var(--primary);
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--accent);
-            transform: scale(1.15);
-        }
-
-        /* ===== LAYOUT ===== */
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 35px;
-            margin-top: 30px;
-        }
-
-        section {
-            margin-bottom: 30px;
-        }
-
-        section h2 {
-            color: var(--primary);
-            border-left: 6px solid var(--accent);
-            padding-left: 12px;
-            margin-bottom: 15px;
-        }
-
-        .profile p {
-            line-height: 1.7;
-        }
-
-        /* ===== SKILLS ===== */
-        .skill {
-            margin-bottom: 12px;
-        }
-
-        .skill span {
-            font-weight: 600;
-        }
-
-        .bar {
-            background: #e0e0e0;
-            height: 10px;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .bar div {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-
-        /* ===== TABLE ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* ===== DETAILS ===== */
-        details {
-            background: #f5f7fb;
-            padding: 14px 18px;
-            border-radius: 10px;
-            margin-bottom: 12px;
-        }
-
-        summary {
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--accent);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-            color: var(--text-light);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-        }
- 
+/* Footer */
+#footer { background: #333; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
