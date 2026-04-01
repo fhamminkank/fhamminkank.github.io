@@ -3,23 +3,26 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // ==========================================================================
-    // 1. XỬ LÝ MODAL TUYỂN DỤNG & PORTFOLIO 
+    // 1. XỬ LÝ MODAL TUYỂN DỤNG & PORTFOLIO (Trang About)
     // ==========================================================================
     const btnOpenJobs = document.getElementById('btnOpenJobs');
     const jobsModal = document.getElementById('jobsModal');
     const applyModal = document.getElementById('applyModal');
-    
     const recruitmentForm = document.getElementById('recruitmentForm');
     const applySuccessModal = document.getElementById('applySuccessModal');
-    const closeApplySuccessBtn = document.getElementById('closeApplySuccessBtn');
     
     if (jobsModal && applyModal) {
         const closeJobsBtn = document.getElementById('closeJobsBtn');
         const closeApplyBtn = document.getElementById('closeApplyBtn');
         const backToJobsBtn = document.getElementById('backToJobsBtn');
         const applyButtons = document.querySelectorAll('.btn-open-apply');
+        const closeApplySuccessBtn = document.getElementById('closeApplySuccessBtn');
+        
+        // Element để thay đổi thông tin Job động
+        const modalJobTitle = document.getElementById('modalJobTitle');
+        const modalJobSalary = document.getElementById('modalJobSalary');
 
         if (btnOpenJobs) {
             btnOpenJobs.addEventListener('click', function(e) {
@@ -30,6 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         applyButtons.forEach(btn => {
             btn.addEventListener('click', function() {
+                // Lấy dữ liệu từ thẻ Job người dùng vừa bấm
+                const jobCard = this.closest('.job-card-modal');
+                const jobName = jobCard.querySelector('h3').innerText;
+                const jobSalary = jobCard.querySelector('.salary').innerText;
+
+                // Gắn dữ liệu vào form Apply
+                if (modalJobTitle) modalJobTitle.innerText = jobName;
+                if (modalJobSalary) modalJobSalary.innerText = jobSalary + ' | FULL-TIME';
+
+                // Chuyển Modal
                 jobsModal.classList.remove('active');
                 applyModal.classList.add('active');
             });
@@ -44,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (recruitmentForm) {
             recruitmentForm.addEventListener('submit', function(e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 applyModal.classList.remove('active');
                 if (applySuccessModal) applySuccessModal.classList.add('active');
                 recruitmentForm.reset();
@@ -56,15 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        if (closeApplySuccessBtn) {
-            closeApplySuccessBtn.addEventListener('click', () => {
-                if (applySuccessModal) applySuccessModal.classList.remove('active');
-            });
-        }
-
+        if (closeApplySuccessBtn) closeApplySuccessBtn.addEventListener('click', () => applySuccessModal.classList.remove('active'));
         if (closeJobsBtn) closeJobsBtn.addEventListener('click', () => jobsModal.classList.remove('active'));
         if (closeApplyBtn) closeApplyBtn.addEventListener('click', () => applyModal.classList.remove('active'));
-
+        
+        // Upload CV File Name
         const uploadBox = document.querySelector('.upload-box');
         const cvUpload = document.getElementById('cvUpload');
         if(uploadBox && cvUpload) {
@@ -78,86 +87,122 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
     // ==========================================================================
-    // 2. XỬ LÝ FORM LIÊN HỆ (CONTACT FORM VALIDATION)
+    // 2. XỬ LÝ FORM LIÊN HỆ (Trang Contact)
     // ==========================================================================
     const contactForm = document.getElementById('contactForm');
-    
     if (contactForm) {
-        const fullName = document.getElementById('fullName');
-        const emailAddress = document.getElementById('emailAddress');
-        const message = document.getElementById('message');
-        
         const successModal = document.getElementById('successModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
-        const showError = (input, message) => {
-            const formGroup = input.parentElement;
-            const errorElement = formGroup.querySelector('.error-message');
-            input.style.border = '2px solid #ef4444'; 
-            errorElement.textContent = message;
-            errorElement.style.color = '#ef4444';
-            errorElement.style.fontSize = '0.85rem';
-            errorElement.style.marginTop = '5px';
-            errorElement.style.display = 'block';
-            return false;
-        };
-
-        const showSuccess = (input) => {
-            const formGroup = input.parentElement;
-            const errorElement = formGroup.querySelector('.error-message');
-            input.style.border = '2px solid #10b981'; 
-            errorElement.textContent = '';
-            errorElement.style.display = 'none';
-            return true;
-        };
-
-        const checkEmail = (input) => {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (re.test(input.value.trim())) {
-                return showSuccess(input);
-            } else {
-                return showError(input, 'Email không hợp lệ. Vui lòng kiểm tra lại (vd: ten@gmail.com).');
-            }
-        };
-
-        const checkRequired = (input, fieldName) => {
-            if (input.value.trim() === '') {
-                return showError(input, `${fieldName} không được để trống.`);
-            } else {
-                return showSuccess(input);
-            }
-        };
-
-        if(fullName) fullName.addEventListener('input', () => checkRequired(fullName, 'Họ và tên'));
-        if(emailAddress) emailAddress.addEventListener('input', () => {
-            if (emailAddress.value.trim() !== '') checkEmail(emailAddress);
-            else checkRequired(emailAddress, 'Email');
-        });
-        if(message) message.addEventListener('input', () => checkRequired(message, 'Nội dung'));
-
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
+            if (successModal) successModal.classList.add('active');
+            contactForm.reset();
+        });
 
-            let isNameValid = checkRequired(fullName, 'Họ và tên');
-            let isEmailValid = emailAddress.value.trim() !== '' ? checkEmail(emailAddress) : checkRequired(emailAddress, 'Email');
-            let isMessageValid = checkRequired(message, 'Nội dung');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => successModal.classList.remove('active'));
+        }
+    }
 
-            if (isNameValid && isEmailValid && isMessageValid) {
-                const contactData = {
-                    name: fullName.value.trim(),
-                    email: emailAddress.value.trim(),
-                    subject: document.getElementById('subject').value,
-                    message: message.value.trim(),
-                    date: new Date().toLocaleString()
-                };
-                
-                let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-                messages.push(contactData);
-                localStorage.setItem('contactMessages', JSON.stringify(messages));
 
-                if (successModal) successModal.classList.add('active');
+    // ==========================================================================
+    // 3. XỬ LÝ CHATBOT TRỢ LÝ ẢO (Trang Contact)
+    // ==========================================================================
+    const chatbotToggler = document.getElementById('chatbotToggler');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    if (chatbotToggler && chatbotWindow) {
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatBody = document.getElementById('chatBody');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+        
+        chatbotToggler.addEventListener('click', () => chatbotWindow.classList.toggle('active'));
+        if(closeChatBtn) closeChatBtn.addEventListener('click', () => chatbotWindow.classList.remove('active'));
 
-                contactForm.reset();
-                fullName.style.border = '1px solid #d1d5db';
-                emailAddress.style.border = '1px solid #d1d5db';
+        const createChatLi = (message, className) => {
+            const chatDiv = document.createElement("div");
+            chatDiv.classList.add("chat-message", className);
+            chatDiv.innerHTML = `<p>${message}</p>`;
+            return chatDiv;
+        }
+
+        const generateBotResponse = (userText) => {
+            const text = userText.toLowerCase();
+            if (text.includes('mua vé') || text.includes('đặt vé') || text.includes('mua')) {
+                return "🎫 Để mua vé, bạn vui lòng truy cập menu <strong>Sự kiện</strong>, chọn sự kiện yêu thích và bấm <strong>'Đặt vé ngay'</strong>.";
+            } else if (text.includes('lỗi') || text.includes('thanh toán') || text.includes('hoàn tiền')) {
+                return "💳 Nếu bạn gặp sự cố thanh toán hoặc muốn hoàn tiền, vui lòng cung cấp Mã Đơn Hàng vào Form Liên Hệ bên cạnh nhé.";
+            } else if (text.includes('lịch') || text.includes('thời gian') || text.includes('khi nào')) {
+                return "📅 Bạn có thể xem toàn bộ lịch trình các sự kiện sắp diễn ra trong tháng tại trang <strong>Lịch Sự Kiện</strong>.";
+            } else if (text.includes('hợp tác') || text.includes('tổ chức') || text.includes('tài trợ')) {
+                return "🤝 Rất vui được kết nối với bạn! Vui lòng chọn chủ đề <strong>'Hợp tác tổ chức sự kiện'</strong> ở Form Liên Hệ nhé.";
+            } else if (text.includes('khuyến mãi') || text.includes('ưu đãi') || text.includes('giảm giá')) {
+                return "🎁 Hiện tại EventHub đang có chương trình giảm 10% cho sinh viên. Nhanh tay săn vé bạn nhé!";
+            } else if (text.includes('hướng dẫn') || text.includes('cách dùng') || text.includes('tạo tài khoản')) {
+                return "🛠️ Để bắt đầu, bạn hãy bấm vào nút <strong>'Đăng nhập'</strong> ở góc phải phía trên màn hình để tạo tài khoản.";
+            } else if (text.includes('chào') || text.includes('hello') || text.includes('hi')) {
+                return "👋 Chào bạn! Mình là Trợ lý ảo của EventHub. Bạn đang cần tìm vé sự kiện hay cần hỗ trợ kỹ thuật ạ?";
+            } else {
+                return "🤖 Xin lỗi, mình chưa hiểu rõ ý này của bạn. Bạn có thể sử dụng các từ khóa như: <em>mua vé, thanh toán, lịch sự kiện, khuyến mãi...</em> nhé!";
+            }
+        };
+
+        const handleChat = (messageText) => {
+            const userMessage = messageText || chatInput.value.trim();
+            if (!userMessage) return;
+
+            if(chatInput) chatInput.value = "";
+            if(chatBody) {
+                chatBody.appendChild(createChatLi(userMessage, "user-message"));
+                chatBody.scrollTo(0, chatBody.scrollHeight);
+
+                const typingLi = createChatLi("...", "bot-message");
+                chatBody.appendChild(typingLi);
+                chatBody.scrollTo(0, chatBody.scrollHeight);
+
+                setTimeout(() => {
+                    chatBody.removeChild(typingLi); 
+                    const botResponse = generateBotResponse(userMessage); 
+                    chatBody.appendChild(createChatLi(botResponse, "bot-message"));
+                    chatBody.scrollTo(0, chatBody.scrollHeight);
+                }, 1000);
+            }
+        }
+
+        if(sendChatBtn) sendChatBtn.addEventListener('click', () => handleChat());
+        if(chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChat();
+            });
+        }
+        if(quickActionBtns) {
+            quickActionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const text = btn.textContent.trim(); 
+                    handleChat(text); 
+                });
+            });
+        }
+    }
+
+
+    // ==========================================================================
+    // 4. ĐÓNG MODAL KHI CLICK RA NGOÀI (Chung)
+    // ==========================================================================
+    window.addEventListener('click', function(e) {
+        const jobsModal = document.getElementById('jobsModal');
+        const applyModal = document.getElementById('applyModal');
+        const successModal = document.getElementById('successModal');
+        const applySuccessModal = document.getElementById('applySuccessModal');
+
+        if (jobsModal && e.target === jobsModal) jobsModal.classList.remove('active');
+        if (applyModal && e.target === applyModal) applyModal.classList.remove('active');
+        if (successModal && e.target === successModal) successModal.classList.remove('active');
+        if (applySuccessModal && e.target === applySuccessModal) applySuccessModal.classList.remove('active');
+    });
+
+});

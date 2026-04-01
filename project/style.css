@@ -60,7 +60,7 @@ body {
 }
 
 /* ==========================================================================
-   3. HEADER & NAVIGATION (Thanh điều hướng)
+   3. HEADER & NAVIGATION
    ========================================================================== */
 .site-header {
     background: var(--white);
@@ -113,10 +113,10 @@ body {
     transition: var(--transition);
 }
 
-.btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-2px); border: none; }
 
 /* ==========================================================================
-   4. NỘI DUNG TRANG GIỚI THIỆU (Hero, Lưới thông tin)
+   4. NỘI DUNG TRANG GIỚI THIỆU
    ========================================================================== */
 .about-hero {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
@@ -128,7 +128,6 @@ body {
 .about-hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
 .about-hero .lead-text { font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
 
-/* Grid 2 cột cho Khởi nguồn ý tưởng */
 .grid-2-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -148,7 +147,6 @@ body {
 
 .highlight-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: #38bdf8; }
 
-/* Grid 3 cột cho Values và Team */
 .section-header { margin-bottom: 50px; }
 .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
 
@@ -169,7 +167,6 @@ body {
 .value-icon { font-size: 3rem; margin-bottom: 20px; }
 .value-card h3 { margin-bottom: 15px; }
 
-/* Đội ngũ - Giữ nguyên sự tối giản, thanh lịch */
 .team-member {
     background: var(--white);
     border-radius: var(--border-radius);
@@ -198,7 +195,7 @@ body {
 .team-member .role { display: block; color: var(--primary-blue); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
 
 /* ==========================================================================
-   5. CTA BANNER (Kêu gọi hành động)
+   5. CTA BANNER
    ========================================================================== */
 .cta-banner {
     background-color: #3b4256; 
@@ -222,7 +219,7 @@ body {
 }
 
 .btn-solid { background-color: var(--white); color: #3b4256; }
-.btn-solid:hover { background-color: #f1f5f9; transform: translateY(-3px); }
+.btn-solid:hover { background-color: #f1f5f9; transform: translateY(-3px); border: none; }
 
 .btn-outline { background-color: transparent; color: var(--white); border: 1px solid rgba(255, 255, 255, 0.4); }
 .btn-outline:hover { background-color: rgba(255,255,255,0.1); transform: translateY(-3px); }
@@ -322,7 +319,6 @@ body {
     margin-top: 5px;
 }
 
-/* Fix lỗi cân bằng 2 cột trang liên hệ */
 .contact-page .grid-2-cols {
     align-items: stretch !important; 
 }
@@ -491,25 +487,7 @@ body {
 }
 
 /* ==========================================================================
-   9. RESPONSIVE (Hiển thị tốt trên Điện thoại / Máy tính bảng)
-   ========================================================================== */
-@media (max-width: 992px) {
-    .values-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
-    .dark-footer .footer-grid { grid-template-columns: 1fr 1fr; }
-    .jobs-grid-modal { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-    .main-nav { display: none; } 
-    .grid-2-cols, .values-grid, .team-grid, .dark-footer .footer-grid, .apply-form-grid { grid-template-columns: 1fr; }
-    .about-hero h1 { font-size: 2.5rem; }
-    .cta-buttons { flex-direction: column; }
-    .cta-banner { padding: 40px 20px; }
-    .apply-req-ben { flex-direction: column; gap: 20px; padding: 0;}
-    .modal-large { padding: 40px 20px !important; }
-}
-/* ==========================================================================
-   11. CHATBOT TRỢ LÝ ẢO AI
+   9. CHATBOT TRỢ LÝ ẢO AI
    ========================================================================== */
 .chatbot-toggler {
     position: fixed;
@@ -545,7 +523,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* Hiệu ứng trượt lên khi bật */
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
@@ -571,7 +548,7 @@ body {
 
 .chat-avatar {
     width: 45px; height: 45px;
-    background: #fdf2f8; /* Nền hồng nhạt */
+    background: #fdf2f8; 
     color: var(--primary-pink);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -614,7 +591,6 @@ body {
     align-self: flex-end;
 }
 
-/* Lưới nút gợi ý giống ảnh MyViettel */
 .chat-quick-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -653,204 +629,89 @@ body {
 .chat-footer input:focus { border-color: var(--primary-blue); }
 .send-btn { background: transparent; border: none; color: var(--primary-blue); font-size: 1.2rem; cursor: pointer; }
 
+/* ==========================================================================
+   10. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 992px) {
+    .values-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .dark-footer .footer-grid { grid-template-columns: 1fr 1fr; }
+    .jobs-grid-modal { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .main-nav { display: none; } 
+    .grid-2-cols, .values-grid, .team-grid, .dark-footer .footer-grid, .apply-form-grid { grid-template-columns: 1fr; }
+    .about-hero h1 { font-size: 2.5rem; }
+    .cta-buttons { flex-direction: column; }
+    .cta-banner { padding: 40px 20px; }
+    .apply-req-ben { flex-direction: column; gap: 20px; padding: 0;}
+    .modal-large { padding: 40px 20px !important; }
+}
+
 @media (max-width: 480px) {
     .chatbot-window { width: 90%; right: 5%; bottom: 100px; }
     .chatbot-toggler { width: 55px; height: 55px; bottom: 20px; right: 20px; }
 }
 /* ==========================================================================
-   TEAM MEMBER CAROUSEL (HIỆU ỨNG 3D XOAY TRÒN)
+   11. HÀNH TRÌNH PHÁT TRIỂN (TIMELINE)
    ========================================================================== */
-.carousel-wrapper {
+.timeline-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
     position: relative;
-    width: 100%;
-    height: 500px;
-    perspective: 1500px; /* Tạo hiệu ứng chiều sâu 3D */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
+    padding-left: 40px;
 }
 
-.carousel-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d; /* Giữ các con cũng tính 3D */
-    transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1); /* Hiệu ứng xoay mượt mà */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Biến CSS cho kích thước thẻ */
-:root {
-    --card-width: 280px;
-    --card-height: 420px;
-}
-
-.team-member.item {
-    position: absolute;
-    width: var(--card-width);
-    height: var(--card-height);
-    background: var(--white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 1s ease;
-    opacity: 0;
-    visibility: hidden;
-    backface-visibility: hidden; /* Ẩn mặt sau để hiệu ứng đẹp hơn */
-    display: flex;
-    flex-direction: column;
-}
-
-/* -- Trạng thái: Đang hoạt động (Nằm ở phía trước, rõ ràng) -- */
-.team-member.item.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(-50%, -50%, 0) rotateY(0deg) scale(1.1); /* Nổi bật hơn */
-    z-index: 10;
-}
-
-/* Thêm bóng đổ đổ xuống giống ảnh tham khảo cho thẻ hoạt động */
-.team-member.item.active::after {
+/* Đường kẻ dọc */
+.timeline-wrapper::before {
     content: '';
     position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%) rotateX(70deg);
-    width: 100%;
-    height: 30px;
-    background: radial-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0) 70%);
-    border-radius: 50%;
-    filter: blur(5px);
-    z-index: -1;
-}
-
-/* -- Trạng thái: Các thẻ bên cạnh (nghiêng, mờ) -- */
-.team-member.item.next {
-    opacity: 0.7;
-    visibility: visible;
-    transform: translate3d(15%, -50%, -150px) rotateY(-35deg) scale(1);
-    z-index: 5;
-}
-
-.team-member.item.prev {
-    opacity: 0.7;
-    visibility: visible;
-    transform: translate3d(-115%, -50%, -150px) rotateY(35deg) scale(1);
-    z-index: 5;
-}
-
-/* -- Trạng thái: Các thẻ xa hơn (mờ hơn, nhỏ hơn) -- */
-.team-member.item.next-2 {
-    opacity: 0.4;
-    visibility: visible;
-    transform: translate3d(55%, -50%, -300px) rotateY(-50deg) scale(0.9);
-    z-index: 2;
-}
-
-.team-member.item.prev-2 {
-    opacity: 0.4;
-    visibility: visible;
-    transform: translate3d(-155%, -50%, -300px) rotateY(50deg) scale(0.9);
-    z-index: 2;
-}
-
-/* -- Trạng thái: Thẻ ẩn -- */
-.team-member.item.hide {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate3d(-50%, -50%, -500px) rotateY(0deg) scale(0.8);
-    z-index: -1;
-}
-
-/* -- Định dạng text bên dưới thẻ -- */
-.team-member figcaption {
-    padding: 20px 25px;
-    text-align: center;
-    background: var(--white);
-    flex-grow: 1; /* Điền đầy không gian còn lại */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.team-member h3 {
-    color: var(--text-dark);
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-
-.team-member .role {
-    display: block;
-    color: var(--primary-blue);
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.team-member .bio {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Giới hạn 3 dòng để thẻ không bị quá dài */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.5;
-}
-
-/* -- Nút điều khiển (carousel-controls) -- */
-.carousel-controls {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.carousel-controls button {
+    top: 10px; 
+    left: 8px;
+    height: calc(100% - 20px);
+    width: 2px;
     background: #e2e8f0;
-    color: var(--text-dark);
-    border: 1px solid #cbd5e1;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
-.carousel-controls {
+
+.timeline-item {
     position: relative;
-    z-index: 100;
-}
-.carousel-controls button i { font-size: 1rem; color: #4b5563; }
-
-.carousel-controls button.btn-auto.active {
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-pink));
-    color: white;
-    border-color: var(--primary-pink);
-    box-shadow: 0 4px 10px rgba(236, 72, 153, 0.2);
+    margin-bottom: 50px;
 }
 
-.carousel-controls button.btn-auto.active i { color: white; }
+.timeline-item:last-child { margin-bottom: 0; }
 
-.carousel-controls button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+/* Dấu chấm tròn */
+.timeline-dot {
+    position: absolute;
+    left: -40px;
+    top: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px var(--white);
+    z-index: 2;
 }
 
-@media (max-width: 992px) {
-    .carousel-wrapper { height: 450px; perspective: 1000px; }
-    :root { --card-width: 250px; --card-height: 380px; }
+.timeline-year {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-style: italic;
+    margin-bottom: 5px;
 }
 
-@media (max-width: 768px) {
-    .carousel-wrapper { height: 400px; }
-    :root { --card-width: 220px; --card-height: 340px; }
+.timeline-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
+
+.timeline-content p {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Chỉnh lại Modal một chút cho đẹp */
+.text-right { text-align: right; }
