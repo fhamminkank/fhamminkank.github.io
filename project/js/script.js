@@ -91,21 +91,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================================================
     // 2. XỬ LÝ FORM LIÊN HỆ (Trang Contact)
     // ==========================================================================
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        const successModal = document.getElementById('successModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    const successModal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            if (successModal) successModal.classList.add('active');
-            contactForm.reset();
-        });
+// TRONG FILE contact.js
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
 
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', () => successModal.classList.remove('active'));
-        }
+    const formData = {
+        id: `TK-${Date.now()}`, // Format ID giống Admin (TK-...)
+        name: document.getElementById('fullName').value,
+        email: document.getElementById('emailAddress').value,
+        subject: document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text,
+        message: document.getElementById('message').value,
+        time: "Vừa xong", // Admin của bạn dùng thuộc tính 'time'
+        priority: "Cao"   // Mặc định hoặc Thảo có thể thêm logic chọn
+    };
+
+    // Lấy danh sách cũ với key 'contact_messages'
+    let contactList = JSON.parse(localStorage.getItem('contact_messages')) || [];
+    contactList.push(formData);
+    localStorage.setItem('contact_messages', JSON.stringify(contactList));
+
+    if (successModal) successModal.classList.add('active');
+    contactForm.reset();
+});
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => successModal.classList.remove('active'));
     }
+}
 
 
     // ==========================================================================

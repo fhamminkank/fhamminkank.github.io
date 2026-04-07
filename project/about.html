@@ -3,349 +3,579 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Khám phá câu chuyện, đội ngũ và sứ mệnh của EventHub - Nền tảng quản lý sự kiện và đặt vé thông minh hàng đầu.">
-    <title>Về Chúng Tôi | EventHub</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <title>Elysium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
-    <header class="site-header" id="header">
-        <div class="container">
-            <a href="index.html" class="logo">EventHub.</a>
-            <nav class="main-nav" aria-label="Điều hướng chính">
-                <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="events.html">Sự kiện</a></li>
-                    <li><a href="calendar.html">Lịch</a></li>
-                    <li><a href="about.html" class="active" aria-current="page">Về chúng tôi</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <a href="login.html" class="btn btn-primary">Đăng nhập</a>
+    body { 
+        font-family: 'Plus Jakarta Sans', sans-serif; 
+        background-color: #ffffff; 
+        scroll-behavior: smooth; 
+        margin: 0; /* Đảm bảo không bị lề trắng thừa */
+    }
+
+    /* Ẩn scrollbar cho các thành phần cần thiết */
+    .no-scrollbar::-webkit-scrollbar { 
+        display: none; 
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .text-gradient { 
+        background: linear-gradient(to right, #3b82f6, #ec4899); 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+    }
+    
+    /* Modals */
+    .modal-overlay { 
+        display: none; 
+        position: fixed; 
+        inset: 0; 
+        z-index: 1000; 
+        background: rgba(0,0,0,0.85); /* Giảm độ tối một chút cho đỡ gắt */
+        backdrop-filter: blur(15px); 
+        align-items: center; 
+        justify-content: center; 
+        padding: 20px; 
+        opacity: 0; /* Chuẩn bị cho animation */
+    }
+
+    .modal-overlay.active { 
+        display: flex; 
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+    }
+
+    @keyframes fadeIn { 
+        from { opacity: 0; transform: scale(0.95); } 
+        to { opacity: 1; transform: scale(1); } 
+    }
+    
+    /* Card Interactions */
+    .card-hover { 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        cursor: pointer; 
+        will-change: transform; /* Tối ưu hiệu năng khi di chuột */
+    }
+
+    .card-hover:hover { 
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Thêm bóng cho đỡ trống layout */
+    }
+
+
+</style>
+</head>
+<body class="text-gray-900 overflow-x-hidden">
+
+    <div class="flex">
+       <!-- SIDEBAR -->
+<aside class="w-72 bg-white/50 sticky top-0 h-screen p-4 hidden xl:flex flex-col border-r border-white items-start">
+
+    <div class="mb-12 mt-4 ml-2">
+        <a href="index.html" class="inline-flex items-center group transition-transform active:scale-95">
+    
+            <h1 class="text-3xl font-black tracking-tighter">
+                <span class="text-blue-300">ELY</span>
+    <span class="text-pink-300">SIUM</span>
+            </h1>
+        </a>
+    </div>
+
+    <nav class="space-y-2 flex-1 w-full">
+        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-6 ml-4 text-left">Hỗ trợ</p>
+      
+        <a href="calendar.html" class="w-full flex items-center px-2 py-4 rounded-3xl font-bold text-gray-500 hover:bg-white hover:text-pink-500 transition-all group">
+            <i class="fa-solid fa-calendar-days w-12 text-center text-lg"></i>
+            <span>Lịch sự kiện</span>
+        </a>
+
+        <!-- Menu Active: Về chúng tôi (Đã chuyển class active lên đây) -->
+<a href="about.html" class="w-full flex items-center px-2 py-4 rounded-3xl font-bold bg-white text-pink-500 shadow-lg shadow-pink-100/50 transition-all">
+    <i class="fa-solid fa-users w-12 text-center text-lg"></i>
+    <span>Về chúng tôi</span>
+</a>
+
+<!-- Menu: Trung tâm trợ giúp (Trở về trạng thái bình thường) -->
+<a href="#" class="w-full flex items-center px-2 py-4 rounded-3xl font-bold text-gray-500 hover:bg-white hover:text-pink-500 transition-all group">
+    <i class="fa-solid fa-headset w-12 text-center text-lg"></i>
+    <span>Trung tâm trợ giúp</span>
+</a>
+    </nav>
+    <div class="w-full p-6 rounded-[2.5rem] bg-white border-2 border-pink-100 shadow-sm mt-auto mb-4">
+        <p class="text-[10px] font-black text-pink-500 uppercase mb-2 italic">Hỗ trợ khẩn cấp</p>
+        <p class="text-lg font-black tracking-tighter">1900 8888</p>
+        <p class="text-[9px] text-gray-400 font-bold mt-1">08:00 - 22:00</p>
+    </div>
+</aside>
+    
+<!-- MAIN CONTENT -->
+<main class="flex-1 min-w-0 bg-white px-6 lg:px-16 transition-all duration-300">
+    
+    
+    <!-- HEADER: GỌN GÀNG & TINH TẾ -->
+<header class="pt-12 pb-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="relative"> 
+            <h1 class="text-3xl font-black tracking-tighter uppercase leading-normal py-1 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-pink-500">
+                Câu chuyện Đổi mới
+            </h1>
+            <div class="inline-flex items-center gap-2 px-1 py-1 rounded-full bg-slate-50 border border-slate-100 mt-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span>
+                <span class="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Hành trình Elysium</span>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main id="main-content">
+<!-- SECTION 1: RE-LAYOUT SONG SONG -->
+<section class="relative pt-0 pb-16 lg:pb-24">
+    <div class="max-w-6xl">
+        <!-- Grid chia 2 cột song song -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            
+            <!-- Cột 1: Khởi nguồn từ khát vọng -->
+            <div class="p-6 rounded-2xl bg-slate-50/50 border-l-4 border-pink-500/30">
+                <p class="text-slate-600 font-medium leading-relaxed italic">
+                    "Khởi nguồn từ khát vọng số hóa toàn diện, Elysium ra đời nhằm phá vỡ những rào cản truyền thống trong quy trình quản trị sự kiện."
+                </p>
+            </div>
+
+            <!-- Cột 2: Nội dung Elysium không bắt đầu từ... -->
+            <div class="relative">
+                <span class="text-6xl font-black text-slate-900 float-left mr-4 mt-2 leading-[0.8]">E</span>
+                <p class="text-slate-500 text-lg font-medium leading-relaxed">
+                    lysium không bắt đầu từ những dòng code khô khan, mà khởi nguồn từ sự trăn trở về những <span class="text-slate-900 font-bold">"đứt gãy" trong cảm xúc</span>. Chúng tôi thấu hiểu nỗi lo của nhà tổ chức giữa biển dữ liệu rối ren.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- SECTION 2: TẦM NHÌN DATA (BO GÓC NHƯ MỘT CHIẾC CARD LỚN) -->
+    <section class="relative py-16 lg:py-24">
+        <!-- Lớp nền bo góc -->
+        <div class="absolute inset-0 bg-[#fafafa] rounded-[3rem] lg:rounded-[5rem] border border-slate-50 shadow-sm mx-2"></div>
         
-        <section class="about-hero" aria-labelledby="hero-title">
-            <div class="container hero-content text-center">
-                <h1 id="hero-title" class="text-gradient">Tiên Phong Kiến Tạo Kỷ Nguyên Sự Kiện Số</h1>
-                <p class="lead-text">Tối ưu hóa quy trình quản trị, bứt phá giới hạn kết nối và nâng tầm trải nghiệm người dùng qua một hệ sinh thái công nghệ toàn diện.</p>
-            </div>
-        </section>
+        <div class="max-w-6xl mx-auto relative z-10 px-8 lg:px-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold italic tracking-tighter uppercase leading-[1.1] text-slate-900">
+                        Khát vọng   <br> 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Định nghĩa </span> <br>
+                        Sự kết nối.
+                    </h2>
+                    <div class="italic border-l-4 border-indigo-500 pl-6 py-4 bg-white/60 backdrop-blur-sm rounded-r-2xl text-slate-700 text-lg">
+                        Mọi điểm chạm đều minh bạch, an toàn và tràn đầy cảm hứng nhờ sức mạnh công nghệ.
+                    </div>
+                </div>
 
-        <section class="about-story-vision section-padding">
-            <div class="container grid-2-cols">
-                <article class="story-content">
-                    <h2>Câu Chuyện Đổi Mới & Sáng Tạo</h2>
-                    <p>Khởi nguồn từ khát vọng số hóa toàn diện, EventHub ra đời nhằm phá vỡ những rào cản truyền thống trong quy trình phân phối vé và quản trị sự kiện. Chúng tôi nhận ra sự đứt gãy trong trải nghiệm của cả nhà tổ chức lẫn người tham dự.</p>
-                    <p>Chính vì vậy, EventHub không chỉ định hình là một nền tảng thương mại điện tử đơn thuần, mà là một <strong>giải pháp quản trị chiến lược</strong>: minh bạch hóa đối soát tài chính, kiểm soát rủi ro giao dịch và tối ưu hóa hoàn toàn hành trình khách hàng từ điểm chạm đầu tiên cho đến bước check-in tại cửa.</p>
-                </article>
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-white p-8 lg:p-10 rounded-[2.5rem] border border-white shadow-xl shadow-slate-200/50 group hover:-translate-y-2 transition-all duration-500">
+                        <div class="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl lg:text-2xl font-extrabold italic mb-4 uppercase text-slate-900 leading-tight">
+                            Tầm nhìn <br><span class="text-indigo-600">Dữ liệu vị nhân sinh</span>
+                        </h3>
+                        <p class="text-slate-500 leading-relaxed font-medium mb-8 text-sm lg:text-base">
+                            Bằng sức mạnh của <span class="text-slate-900 font-bold">AI & Big Data</span>, chúng tôi không chỉ phân tích quá khứ, mà còn dự báo tương lai.
+                        </p>
+                        <div class="pt-6 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 italic">Data-Driven Leadership</span>
+                            <div class="flex space-x-1.5">
+                                <div class="w-1.5 h-1.5 bg-indigo-200 rounded-full"></div>
+                                <div class="w-6 h-1.5 bg-indigo-600 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: BENTO STATS -->
+    <section class="max-w-6xl mx-auto my-28 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-12 gap-4">
+                <!-- CỘT 1: CHỈ SỐ QUỐC GIA -->
+                <div class="col-span-12 md:col-span-4 bg-white border border-slate-100 p-8 rounded-[3rem] flex flex-col justify-between h-[280px] shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600">
+                        <i class="fa-solid fa-globe text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-extrabold italic tracking-tighter text-slate-900">15<span class="text-blue-500">+</span></h3>
+                        <p class="text-slate-400 font-bold uppercase text-[9px] tracking-[0.2em] mt-2">Quốc gia hiện diện</p>
+                    </div>
+                </div>
+
+                <!-- CỘT 2: GIAO DỊCH -->
+                <div class="col-span-12 md:col-span-8 bg-slate-900 p-8 rounded-[3rem] text-white flex flex-col justify-between relative overflow-hidden group h-[280px] shadow-xl">
+                    <div class="relative z-10">
+                        <span class="bg-emerald-500/10 text-emerald-400 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-500/20">Live Stats</span>
+                        <h3 class="text-5xl font-extrabold italic tracking-tighter text-gradient leading-none mt-6">2.4 Triệu</h3>
+                        <p class="text-slate-400 font-bold uppercase text-[9px] tracking-[0.2em] mt-4">Giao dịch thành công / năm</p>
+                    </div>
+                    <div class="absolute bottom-6 right-8 flex items-end space-x-2 h-20">
+                        <div class="w-2 bg-indigo-500/20 h-8 rounded-full"></div>
+                        <div class="w-2 bg-indigo-500/40 h-12 rounded-full"></div>
+                        <div class="w-2 bg-indigo-500/60 h-16 rounded-full group-hover:h-20 transition-all"></div>
+                        <div class="w-2 bg-indigo-500 h-14 rounded-full"></div>
+                    </div>
+                    <i class="fa-solid fa-bolt absolute -right-4 -top-4 text-8xl text-white/5 group-hover:text-yellow-400/10 transition-all duration-700"></i>
+                </div>
+
+                <!-- CỘT 3: ĐỐI TÁC -->
+                <div class="col-span-12 md:col-span-7 bg-indigo-50 p-8 rounded-[3rem] flex items-center justify-between h-[180px] group">
+                    <div class="max-w-[180px]">
+                        <h4 class="text-slate-900 font-extrabold italic text-lg leading-tight uppercase">Đối tác tin dùng</h4>
+                        <p class="text-slate-500 text-[11px] font-medium mt-2 italic">Kết nối với hơn 500+ doanh nghiệp hàng đầu.</p>
+                    </div>
+                    <div class="flex -space-x-3">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=1" class="w-12 h-12 rounded-full border-4 border-indigo-50 bg-white">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=2" class="w-12 h-12 rounded-full border-4 border-indigo-50 bg-white">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=3" class="w-12 h-12 rounded-full border-4 border-indigo-50 bg-white">
+                        <div class="w-12 h-12 rounded-full border-4 border-indigo-50 bg-slate-900 flex items-center justify-center text-[10px] font-bold text-white">+50</div>
+                    </div>
+                </div>
+
+                <!-- CỘT 4: BẢO MẬT -->
+                <div class="col-span-12 md:col-span-5 bg-white border border-slate-100 p-8 rounded-[3rem] flex flex-col justify-center h-[180px] hover:border-indigo-200 transition-all">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-pink-500 text-3xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-900 font-extrabold text-sm uppercase tracking-tighter italic leading-none">Security First</h4>
+                            <p class="text-slate-400 text-[10px] font-bold mt-1 uppercase">Mã hóa AES-256</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HỆ GIÁ TRỊ (NEW INTEGRATION) -->
+    <section class="mb-40 max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-black italic tracking-tighter uppercase mb-4">Hệ Giá Trị <span class="text-pink-500">Bền Vững</span></h2>
+            <p class="text-gray-400 font-bold text-xs uppercase tracking-widest">Triết lý vận hành cốt lõi định hình nên sự xuất sắc</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-10 rounded-[3rem] border border-gray-100 card-hover shadow-sm hover:shadow-xl transition-all">
+                <div class="text-4xl mb-6">⚡</div>
+                <h4 class="text-lg font-black uppercase italic mb-4 tracking-tight leading-tight">Hiệu Suất Vượt Trội</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Hệ thống xử lý giao dịch và xác thực vé theo thời gian thực (real-time), đảm bảo tính liên tục tuyệt đối.</p>
+            </div>
+            <div class="bg-white p-10 rounded-[3rem] border border-gray-100 card-hover shadow-sm hover:shadow-xl transition-all">
+                <div class="text-4xl mb-6">🤝</div>
+                <h4 class="text-lg font-black uppercase italic mb-4 tracking-tight leading-tight">Tư Duy Agile</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Đề cao tinh thần trao quyền, đổi mới sáng tạo liên tục và gắn kết chặt chẽ giữa các khối chuyên môn.</p>
+            </div>
+            <div class="bg-white p-10 rounded-[3rem] border border-gray-100 card-hover shadow-sm hover:shadow-xl transition-all">
+                <div class="text-4xl mb-6">🔒</div>
+                <h4 class="text-lg font-black uppercase italic mb-4 tracking-tight leading-tight">Bảo Mật Enterprise</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Áp dụng mã hóa đầu cuối, đảm bảo an toàn lịch sử giao dịch và quyền riêng tư nghiêm ngặt.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HÀNH TRÌNH PHÁT TRIỂN -->
+    <section class="mb-40 max-w-6xl mx-auto">
+        <h3 class="text-3xl font-black italic tracking-tighter mb-20 uppercase text-center">Hành trình <span class="text-blue-600">Phát triển</span></h3>
+        <div class="space-y-16 max-w-3xl mx-auto border-l-2 border-gray-100 pl-12 relative">
+            <div class="relative">
+                <div class="w-4 h-4 bg-pink-500 rounded-full absolute -left-[49px] top-2"></div>
+                <div class="font-black italic text-2xl text-pink-500 mb-2">2025</div>
+                <h5 class="text-xl font-black italic uppercase">Khởi đầu khát vọng</h5>
+                <p class="text-gray-500 mt-2 font-medium italic">Thành lập tại VNU-IS với 6 thành viên.</p>
+            </div>
+            <div class="relative">
+                <div class="w-4 h-4 bg-blue-500 rounded-full absolute -left-[49px] top-2"></div>
+                <div class="font-black italic text-2xl text-blue-500 mb-2">2026</div>
+                <h5 class="text-xl font-black italic uppercase">Mở rộng khu vực</h5>
+                <p class="text-gray-500 mt-2 font-medium italic">Hợp tác 100+ đơn vị. Triển khai Blockchain Ticket ngăn chặn vé giả tuyệt đối.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE TEAM -->
+    <section class="mb-40 max-w-6xl mx-auto">
+        <h3 class="text-3xl font-black italic tracking-tighter mb-16 uppercase border-b-2 border-gray-100 pb-8 text-right">Đội ngũ <span class="text-pink-500">Core Team</span></h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" id="team-grid">
+            <!-- Render từ JS -->
+        </div>
+    </section>
+
+    <!-- JOIN SECTION -->
+    <section class="max-w-6xl mx-auto mb-40">
+        <div class="relative rounded-[4rem] p-1 bg-gradient-to-r from-blue-600 via-pink-500 to-yellow-500">
+            <div class="bg-black rounded-[3.8rem] py-16 text-center text-white overflow-hidden relative">
+                <div class="relative z-10">
+                    <h3 class="text-5xl font-black italic tracking-tighter mb-10 leading-tight">Sẵn sàng kiến tạo tương lai?</h3>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <a href="index.html" class="px-14 py-5 bg-white text-black rounded-full font-black uppercase text-xs tracking-widest hover:scale-105 transition-all">Tham gia ngay</a>
+                        <button onclick="toggleJobsModal(true)" class="px-12 py-5 border-2 border-white/20 rounded-full font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all">Tuyển dụng & Portfolio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+</main>
+    </div>
+
+    <!-- MODAL THÀNH VIÊN -->
+    <div id="member-modal" class="modal-overlay" onclick="closeMemberModal(event)">
+        <div class="bg-white w-full max-w-xl rounded-[3rem] p-12 relative text-center shadow-2xl scale-up">
+            <div id="member-info">
+                <!-- Nội dung TV đổ từ JS -->
+            </div>
+            <button onclick="toggleMemberModal(false)" class="mt-8 text-gray-400 hover:text-black font-black uppercase text-[10px] tracking-widest border-b border-gray-100 pb-1">Đóng lại</button>
+        </div>
+    </div>
+
+    <!-- MODAL TUYỂN DỤNG & UPLOAD CV -->
+    <div id="jobs-modal" class="modal-overlay">
+        <div class="bg-white w-full max-w-5xl rounded-[4rem] p-8 lg:p-16 relative overflow-hidden max-h-[90vh] overflow-y-auto no-scrollbar shadow-2xl">
+            <button onclick="toggleJobsModal(false)" class="absolute top-8 right-8 text-gray-300 hover:text-black transition-colors"><i class="fa-solid fa-xmark text-3xl"></i></button>
+            
+            <div id="job-list">
+                <h3 class="text-4xl font-black italic mb-2 uppercase tracking-tighter">Gia nhập <span class="text-pink-500">Elysium</span></h3>
+                <p class="text-gray-400 font-bold text-xs uppercase tracking-widest mb-10 italic">Cùng chúng tôi kiến tạo tương lai sự kiện</p>
+                <div class="grid md:grid-cols-2 gap-4" id="jobs-grid">
+                    <!-- Render từ JS -->
+                </div>
+            </div>
+
+            <div id="job-detail" class="hidden">
+                <button onclick="backToList()" class="mb-8 text-gray-400 font-black text-[10px] uppercase tracking-widest flex items-center hover:text-black"><i class="fa-solid fa-chevron-left mr-2"></i> Trở về danh sách</button>
+                <div id="detail-content" class="mb-10"></div>
                 
-                <aside class="vision-content highlight-box card-hover">
-                    <h3>Tầm Nhìn Dữ Liệu & Trí Tuệ Nhân Tạo</h3>
-                    <p>Không dừng lại ở việc tự động hóa, định hướng dài hạn của EventHub là tích hợp Machine Learning và Phân tích Dữ liệu Lớn (Big Data). Mục tiêu của chúng tôi là cá nhân hóa tối đa lộ trình tham gia hội thảo, đồng thời cung cấp các báo cáo phân tích chuyên sâu giúp nhà tổ chức đưa ra quyết định dựa trên dữ liệu <em>(Data-driven decision making)</em>.</p>
-                </aside>
-            </div>
-        </section>
+                <div class="bg-gray-50 p-8 lg:p-12 rounded-[3.5rem] border border-gray-100">
+                    <div id="application-form-container">
+                        <h4 class="text-xl font-black italic uppercase mb-8 text-center">Nộp hồ sơ ứng tuyển</h4>
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Họ và tên *" class="w-full bg-white px-6 py-4 rounded-2xl outline-none border border-gray-100 focus:border-pink-500 font-bold" required>
+                                <input type="email" placeholder="Email *" class="w-full bg-white px-6 py-4 rounded-2xl outline-none border border-gray-100 focus:border-pink-500 font-bold" required>
+                            </div>
+                            <input type="url" placeholder="Link Portfolio (Behance/GitHub/Drive) *" class="w-full bg-white px-6 py-4 rounded-2xl outline-none border border-gray-100 focus:border-pink-500 font-bold" required>
+                            
+                            <!-- UPLOAD FIELD CHUẨN -->
+                            <div class="relative group">
+                                <input type="file" id="cv-file" class="hidden" onchange="updateFileName(this)">
+                                <label for="cv-file" class="bg-white border-2 border-dashed border-gray-200 p-8 rounded-2xl text-center cursor-pointer hover:border-pink-500 transition-all block">
+                                    <i class="fa-solid fa-file-pdf text-2xl text-gray-300 mb-2 group-hover:text-pink-500"></i>
+                                    <p id="file-name-display" class="text-[10px] font-bold text-gray-400 uppercase">Nhấp để tải lên CV (PDF/DOCX)</p>
+                                </label>
+                            </div>
 
-        <section class="about-values section-padding bg-light">
-            <div class="container">
-                <div class="section-header text-center">
-                    <h2>Hệ Giá Trị Phát Triển Bền Vững</h2>
-                    <p>Triết lý vận hành cốt lõi định hình nên sự xuất sắc của EventHub.</p>
-                </div>
-                
-                <div class="values-grid">
-                    <div class="value-card card-hover">
-                        <div class="value-icon" aria-hidden="true">⚡</div>
-                        <h3>Hiệu Suất Vượt Trội (High Availability)</h3>
-                        <p>Hệ thống xử lý giao dịch và xác thực vé theo thời gian thực (real-time), đảm bảo tính liên tục và khả năng chịu tải linh hoạt trong các chiến dịch mở bán quy mô lớn.</p>
+                            <button type="submit" id="submit-btn" class="w-full bg-black text-white py-6 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-pink-600 transition-all">Gửi hồ sơ ngay</button>
+                        </form>
                     </div>
-                    <div class="value-card card-hover">
-                        <div class="value-icon" aria-hidden="true">🤝</div>
-                        <h3>Tư Duy Lãnh Đạo & Hợp Tác (Agile)</h3>
-                        <p>Vận hành dự án theo mô hình linh hoạt, đề cao tinh thần trao quyền, đổi mới sáng tạo liên tục và sự gắn kết chặt chẽ giữa các khối chuyên môn.</p>
-                    </div>
-                    <div class="value-card card-hover">
-                        <div class="value-icon" aria-hidden="true">🔒</div>
-                        <h3>Bảo Mật Cấp Độ Doanh Nghiệp</h3>
-                        <p>Áp dụng các tiêu chuẩn mã hóa dữ liệu đầu cuối, đảm bảo an toàn tuyệt đối cho lịch sử giao dịch và tuân thủ nghiêm ngặt các nguyên tắc bảo vệ quyền riêng tư.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-<section class="about-timeline section-padding">
-            <div class="container">
-                <div class="section-header text-center" style="margin-bottom: 60px;">
-                    <h2 style="font-style: italic; font-weight: 800; color: var(--primary-blue); text-transform: uppercase;">Hành Trình Phát Triển</h2>
-                </div>
-                
-                <div class="timeline-wrapper">
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background-color: var(--primary-pink);"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-year" style="color: var(--primary-pink);">2024</h3>
-                            <h4 class="timeline-title text-gradient">KHỞI ĐẦU KHÁT VỌNG</h4>
-                            <p>Thành lập tại VNU-IS với 6 thành viên. Thắng giải Startup Công nghệ trẻ.</p>
+
+                    <!-- SUCCESS STATE -->
+                    <div id="success-state" class="hidden text-center py-10 space-y-6">
+                        <div class="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto text-4xl"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4 class="text-3xl font-black italic uppercase mb-4">Hồ sơ đã gửi!</h4>
+                            <p class="text-gray-500 font-medium max-w-sm mx-auto">Hệ thống đã ghi nhận. <span class="text-pink-500 font-bold">Vui lòng đợi email thông báo</span> từ phòng nhân sự (HR) trong vòng 3-5 ngày tới nhé!</p>
                         </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background-color: var(--primary-blue);"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-year" style="color: var(--primary-blue);">2025</h3>
-                            <h4 class="timeline-title text-gradient">MỞ RỘNG KHU VỰC</h4>
-                            <p>Hợp tác 100+ đơn vị. Triển khai Blockchain Ticket ngăn chặn vé giả tuyệt đối.</p>
-                        </div>
+                        <button onclick="backToList()" class="px-10 py-4 bg-gray-100 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all">Quay lại</button>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="about-team section-padding">
-            <div class="container">
-                <div class="section-header text-center">
-                    <h2>Đội Ngũ Phát Triển Khai Phóng</h2>
-                    <p>Hội tụ những chuyên gia đam mê công nghệ, từ kiến trúc sư hệ thống, phân tích dữ liệu đến thiết kế trải nghiệm người dùng.</p>
-                </div>
-                
-                <div class="team-grid">
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Trần Văn A - Project Manager" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Trần Văn A</h3>
-                            <span class="role">Project Manager / Lead Dev</span>
-                            <p class="bio">Thiết kế kiến trúc Database lõi, quản trị rủi ro và điều phối tài nguyên dự án theo chuẩn Agile.</p>
-                        </figcaption>
-                    </figure>
-
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Nguyễn Thị B - UI/UX Designer" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Nguyễn Thị B</h3>
-                            <span class="role">UI/UX & Frontend Engineer</span>
-                            <p class="bio">Nghiên cứu hành vi người dùng, tối ưu hóa điểm chạm thị giác và xây dựng giao diện đa nền tảng.</p>
-                        </figcaption>
-                    </figure>
-
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="Lê Văn C - Backend Developer" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Lê Văn C</h3>
-                            <span class="role">Backend & Cloud Architect</span>
-                            <p class="bio">Xây dựng API, tối ưu thuật toán tìm kiếm và đảm bảo luồng dữ liệu thông suốt, bảo mật cao.</p>
-                        </figcaption>
-                    </figure>
-
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Phạm Thị D - Data Analyst & QA" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Phạm Thị D</h3>
-                            <span class="role">Data Analyst / QA Specialist</span>
-                            <p class="bio">Thiết lập các mô hình thống kê phân tích số liệu kinh doanh và kiểm thử chất lượng hệ thống khắt khe.</p>
-                        </figcaption>
-                    </figure>
-
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Hoàng Văn E - Business Analyst" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Hoàng Văn E</h3>
-                            <span class="role">Business Analyst</span>
-                            <p class="bio">Đánh giá tiềm năng thị trường, lên chiến lược sản phẩm và chuyển hóa nhu cầu khách hàng thành tính năng.</p>
-                        </figcaption>
-                    </figure>
-
-                    <figure class="team-member card-hover">
-                        <div class="member-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Vũ Thị F - Fullstack Developer" loading="lazy">
-                        </div>
-                        <figcaption>
-                            <h3>Vũ Thị F</h3>
-                            <span class="role">Payment Integration Dev</span>
-                            <p class="bio">Chuyên trách tích hợp liền mạch các cổng thanh toán kỹ thuật số chuẩn quốc tế vào nền tảng.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section section-padding">
-            <div class="container">
-                <div class="cta-banner card-hover">
-                    <h2>Sẵn Sàng Đồng Hành Cùng Kỷ Nguyên Mới?</h2>
-                    <div class="cta-buttons">
-                        <a href="login.html" class="btn-solid">KHÁM PHÁ NGAY</a>
-                        <a href="#" id="btnOpenJobs" class="btn-outline">GIA NHẬP ĐỘI NGŨ</a>
+        </div>
+    </div>
+   
+    <footer class="mt-20 py-16 px-6">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <h1 class="text-4xl font-black text-blue-500 tracking-tighter">Elysium</h1>
+                    <p class="text-sm text-gray-500 font-medium leading-relaxed">
+                        Nền tảng quản lý và phân phối vé sự kiện hàng đầu Đông Nam Á, ứng dụng Fintech và Blockchain để bảo vệ quyền lợi người hâm mộ.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="dark-footer">
-        <div class="container">
-            <div class="footer-grid">
-                
-                <div class="footer-col brand-col">
-                    <h3>EventHub.</h3>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" aria-label="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-col">
-                    <h4>LIÊN KẾT</h4>
-                    <ul>
-                        <li><a href="index.html">Trang chủ</a></li>
-                        <li><a href="about.html">Về chúng tôi</a></li>
-                        <li><a href="#">Hồ sơ tài trợ</a></li>
-                        <li><a href="#">Tuyển dụng</a></li>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-widest mb-8 text-gray-900 border-l-4 border-blue-500 pl-4">Liên kết nhanh</h4>
+                    <ul class="space-y-4 text-sm font-bold text-gray-500">
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Trang chủ</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Hệ sinh thái</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Tuyển dụng</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-col">
-                    <h4>HỖ TRỢ</h4>
-                    <ul>
-                        <li><a href="#">Điều khoản sử dụng</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
-                        <li><a href="contact.html">Câu hỏi thường gặp</a></li>
-                        <li><a href="#">Quy trình hoàn tiền</a></li>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-widest mb-8 text-gray-900 border-l-4 border-blue-500 pl-4">Trung tâm hỗ trợ</h4>
+                    <ul class="space-y-4 text-sm font-bold text-gray-500">
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Quy trình hoàn tiền</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-col contact-col">
-                    <h4>LIÊN HỆ</h4>
-                    <p class="hotline">1900.6408</p>
+                <div>
+                    <h4 class="text-xs font-black uppercase tracking-widest mb-8 text-gray-900 border-l-4 border-blue-500 pl-4">Thông tin liên hệ</h4>
+                    <p class="text-3xl font-black text-blue-500 mb-2 tracking-tighter">1900.6408</p>
+                    <p class="text-sm text-gray-400 font-bold mb-6 italic underline hover:text-pink-500 cursor-pointer transition">support@elysium.vn</p>
+                    <div class="space-y-4">
+                        <p class="text-xs text-gray-500 font-bold leading-relaxed flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-blue-500"></i>
+                            Tòa nhà VNU-IS, 144 Xuân Thủy, Cầu Giấy, Hà Nội.
+                        </p>
+                        <p class="text-xs text-gray-500 font-bold leading-relaxed flex items-start">
+                            <i class="fa-solid fa-building mt-1 mr-3 text-blue-500"></i>
+                            Tòa nhà Viettel, 285 Cách Mạng Tháng Tám, Quận 10, TP. Hồ Chí Minh.
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-bottom">
-                <p>2026 EVENTHUB GLOBAL 2ND EDITION</p>
-                <div class="language-flags">
-                    <span title="Tiếng Việt">🇻🇳</span> 
-                    <span title="English">🇺🇸</span>
+            <div class="pt-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <p class="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">© 2026 ELYSIUM GLOBAL PRO EDITION</p>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-3 bg-gray-100 px-4 py-2 rounded-full">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" class="w-5 rounded-sm shadow-sm">
+                        <span class="text-[10px] font-black text-gray-400">EN</span>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-blue-50 px-4 py-2 rounded-full border border-blue-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" class="w-5 rounded-sm shadow-sm">
+                        <span class="text-[10px] font-black text-blue-500">VN</span>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <div class="modal-overlay" id="jobsModal">
-        <div class="modal-content modal-large">
-            <button class="close-modal-btn" id="closeJobsBtn">&times;</button>
-            
-            <div class="jobs-header text-center">
-                <h2 style="font-size: 2.5rem; font-style: italic;">GIA NHẬP <span style="color: #ec4899; font-style: normal;">EVENTHUB</span></h2>
-                <p style="color: var(--text-muted); letter-spacing: 1px; font-size: 0.9rem;">CÙNG CHÚNG TÔI KIẾN TẠO TƯƠNG LAI SỰ KIỆN</p>
-            </div>
+    <script>
+        // DATA TV
+        const team = [
+            { name: "Minh Tran", role: "Founder & CEO", img: "Felix", bio: "Hơn 5 năm kinh nghiệm Fintech, dẫn dắt tầm nhìn chiến lược cho Elysium toàn cầu." },
+            { name: "Linh Nguyen", role: "CTO", img: "Aneka", bio: "Chuyên gia bảo mật Blockchain, cựu kỹ sư cấp cao tại thung lũng Silicon." },
+            { name: "Hoang Pham", role: "Lead Dev", img: "Jack", bio: "Phù thủy Backend, người đảm bảo hệ thống luôn ổn định dưới áp lực hàng triệu user." },
+            { name: "Dieu Thao", role: "Lead Designer", img: "B", bio: "Đam mê thiết kế tối giản, người kiến tạo nên ngôn ngữ hình ảnh đẳng cấp của Elysium." },
+            { name: "Anh Vu", role: "Marketing Lead", img: "C", bio: "Chuyên gia Branding & Digital Growth, đưa Elysium phủ sóng thị trường Đông Nam Á." },
+            { name: "Quang Le", role: "Financial Specialist", img: "D", bio: "Quản lý dòng tiền và các giải pháp thanh toán thông minh tích hợp trên nền tảng." }
+        ];
 
-            <div class="jobs-grid-modal">
-                <div class="job-card-modal">
-                    <span class="job-badge" style="color: #ec4899; background: #fce7f3;">ENGINEERING</span>
-                    <h3>FRONTEND DEVELOPER</h3>
-                    <p class="salary">$1,500 - $3,000</p>
-                    <button class="btn-open-apply">XEM & NỘP HỒ SƠ &rarr;</button>
-                </div>
-                <div class="job-card-modal">
-                    <span class="job-badge" style="color: #3b82f6; background: #dbeafe;">ENGINEERING</span>
-                    <h3>BACKEND ENGINEER</h3>
-                    <p class="salary">$1,800 - $3,500</p>
-                    <button class="btn-open-apply">XEM & NỘP HỒ SƠ &rarr;</button>
-                </div>
-                <div class="job-card-modal">
-                    <span class="job-badge" style="color: #14b8a6; background: #ccfbf1;">CREATIVE</span>
-                    <h3>UI/UX DESIGNER</h3>
-                    <p class="salary">$1,200 - $2,200</p>
-                    <button class="btn-open-apply">XEM & NỘP HỒ SƠ &rarr;</button>
-                </div>
-                <div class="job-card-modal">
-                    <span class="job-badge" style="color: #f59e0b; background: #fef3c7;">GROWTH</span>
-                    <h3>DIGITAL MARKETING</h3>
-                    <p class="salary">$1,000 - $1,800</p>
-                    <button class="btn-open-apply">XEM & NỘP HỒ SƠ &rarr;</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        // DATA JOBS
+        const jobs = [
+            { id: 'fe', title: "Frontend Developer", cat: "Engineering", pay: "$1,500 - $3,000", color: "pink", req: "React/NextJS, Tailwind", ben: "Macbook Pro, Thưởng Quý" },
+            { id: 'be', title: "Backend Engineer", cat: "Engineering", pay: "$1,800 - $3,500", color: "blue", req: "NodeJS, PostgreSQL", ben: "Bảo hiểm quốc tế, Remote" },
+            { id: 'ds', title: "UI/UX Designer", cat: "Creative", pay: "$1,200 - $2,200", color: "emerald", req: "Figma, Portfolio xịn", ben: "Team building, Gym" },
+            { id: 'mkt', title: "Digital Marketing", cat: "Growth", pay: "$1,000 - $1,800", color: "yellow", req: "Ads, Content Strategy", ben: "Thưởng doanh số, Vé Event" }
+        ];
 
-    <div class="modal-overlay" id="applyModal">
-        <div class="modal-content modal-large">
-            <button class="close-modal-btn" id="closeApplyBtn">&times;</button>
-            <button class="back-modal-btn" id="backToJobsBtn">&lt; TRỞ VỀ DANH SÁCH</button>
-            
-            <div class="apply-job-info text-center" style="margin-top: 30px; margin-bottom: 40px;">
-                <h2 id="modalJobTitle" style="font-size: 2.2rem; font-style: italic; color: #db2777; text-transform: uppercase; margin-bottom: 10px;">VỊ TRÍ ỨNG TUYỂN</h2>
-                <p id="modalJobSalary" style="color: var(--text-muted); font-weight: 600; letter-spacing: 1px;">MỨC LƯƠNG | FULL-TIME</p>
-            </div>
-
-            <div class="apply-req-ben">
-                <div class="req-box">
-                    <strong>YÊU CẦU</strong>
-                    <p style="color: var(--text-muted); margin-top: 5px;">• NodeJS, PostgreSQL, React</p>
-                </div>
-                <div class="ben-box text-right" style="text-align: right;">
-                    <strong>QUYỀN LỢI</strong>
-                    <p style="color: var(--text-muted); margin-top: 5px;">• Bảo hiểm quốc tế, Remote</p>
-                </div>
-            </div>
-
-            <div class="apply-form-wrapper">
-                <h3 class="text-center" style="font-style: italic; margin-bottom: 30px; font-size: 1.5rem;">NỘP HỒ SƠ ỨNG TUYỂN</h3>
-                <form id="recruitmentForm">
-                    <div class="apply-form-grid">
-                        <div class="form-group">
-                            <input type="text" class="input-soft" placeholder="Họ và tên *" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="input-soft" placeholder="Email *" required>
-                        </div>
+        // 1. Render Team
+        const teamGrid = document.getElementById('team-grid');
+        team.forEach((m, i) => {
+            teamGrid.innerHTML += `
+                <div class="text-center group card-hover" onclick="showMemberDetail(${i})">
+                    <div class="aspect-square rounded-3xl bg-gray-100 mb-4 overflow-hidden border-2 border-transparent group-hover:border-pink-500">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${m.img}" class="w-full h-full object-cover">
                     </div>
-                    <div class="form-group">
-                        <input type="url" class="input-soft" placeholder="Link Portfolio (Behance/GitHub/Drive) *" required>
-                    </div>
-                    <div class="upload-box">
-                        <i class="fa-solid fa-file-pdf" style="font-size: 2rem; color: #9ca3af; margin-bottom: 10px;"></i>
-                        <p style="font-size: 0.8rem; font-weight: bold; color: #4b5563;">NHẤP ĐỂ TẢI LÊN CV (PDF/DOCX)</p>
-                        <input type="file" id="cvUpload" hidden>
-                    </div>
-                    <button type="submit" class="btn-submit-dark w-100 card-hover">GỬI HỒ SƠ NGAY</button>
-                </form>
-            </div>
-        </div>
-    </div>
+                    <h5 class="font-black italic text-xs uppercase">${m.name}</h5>
+                    <p class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">${m.role}</p>
+                </div>`;
+        });
 
-    <div class="modal-overlay" id="applySuccessModal">
-        <div class="modal-content">
-            <div style="font-size: 3.5rem; margin-bottom: 15px; color: #10b981;">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 class="text-gradient" style="font-size: 1.8rem; margin-bottom: 15px;">Nộp CV Thành Công!</h3>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.6;">
-                Cảm ơn bạn đã quan tâm và ứng tuyển vào EventHub. Bộ phận Nhân sự sẽ xem xét hồ sơ và phản hồi kết quả cho bạn qua email trong thời gian sớm nhất nhé!
-            </p>
-            <button class="btn btn-primary" id="closeApplySuccessBtn" style="width: 100%; padding: 12px; font-size: 1rem;">Hoàn tất</button>
-        </div>
-    </div>
+        // 2. Render Jobs
+        const jobsGrid = document.getElementById('jobs-grid');
+        jobs.forEach(j => {
+            jobsGrid.innerHTML += `
+                <div class="job-card p-8 bg-gray-50 rounded-[3rem] card-hover border-2 border-transparent" onclick="showJobDetail('${j.id}')">
+                    <span class="text-[9px] font-black bg-${j.color}-100 text-${j.color}-600 px-4 py-1 rounded-full uppercase mb-4 inline-block">${j.cat}</span>
+                    <h4 class="text-xl font-black italic uppercase mb-2">${j.title}</h4>
+                    <p class="text-xs text-gray-400 font-bold uppercase mb-4 italic">${j.pay}</p>
+                    <span class="text-[9px] font-black uppercase text-gray-500">Xem & Nộp hồ sơ <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                </div>`;
+        });
 
-    <script src="js/script.js"></script>
+        // 3. Member Detail Logic
+        function showMemberDetail(i) {
+            const m = team[i];
+            const info = document.getElementById('member-info');
+            info.innerHTML = `
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${m.img}" class="w-24 h-24 mx-auto rounded-full bg-gray-50 mb-6 border-4 border-pink-500/10">
+                <h3 class="text-3xl font-black italic uppercase mb-1">${m.name}</h3>
+                <p class="text-pink-500 font-black uppercase text-xs tracking-widest mb-6">${m.role}</p>
+                <div class="bg-gray-50 p-6 rounded-2xl italic text-gray-500 text-sm leading-relaxed">"${m.bio}"</div>
+            `;
+            toggleMemberModal(true);
+        }
+
+        // 4. Job Detail & Form Logic
+        function showJobDetail(id) {
+            const j = jobs.find(x => x.id === id);
+            document.getElementById('job-list').classList.add('hidden');
+            document.getElementById('job-detail').classList.remove('hidden');
+            document.getElementById('detail-content').innerHTML = `
+                <h3 class="text-4xl font-black italic uppercase text-pink-500">${j.title}</h3>
+                <p class="text-gray-400 font-bold uppercase text-xs tracking-widest mt-2 mb-6">${j.pay} | Full-time</p>
+                <div class="grid md:grid-cols-2 gap-8 text-sm">
+                    <div><h5 class="font-black uppercase text-[10px] mb-2">Yêu cầu</h5><p class="text-gray-600 font-medium">• ${j.req}</p></div>
+                    <div><h5 class="font-black uppercase text-[10px] mb-2">Quyền lợi</h5><p class="text-gray-600 font-medium">• ${j.ben}</p></div>
+                </div>
+            `;
+            document.getElementById('application-form-container').classList.remove('hidden');
+            document.getElementById('success-state').classList.add('hidden');
+        }
+
+        function updateFileName(input) {
+            const display = document.getElementById('file-name-display');
+            if(input.files && input.files[0]) {
+                display.innerHTML = `Đã chọn: <span class="text-pink-500">${input.files[0].name}</span>`;
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> Đang xử lý...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('application-form-container').classList.add('hidden');
+                document.getElementById('success-state').classList.remove('hidden');
+                btn.innerHTML = 'Gửi hồ sơ ngay';
+                btn.disabled = false;
+            }, 1800);
+        }
+        function toggleDarkMode() {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// Kiểm tra khi load trang
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+}
+
+        function toggleJobsModal(s) { document.getElementById('jobs-modal').classList.toggle('active', s); if(!s) backToList(); document.body.style.overflow = s ? 'hidden' : 'auto'; }
+        function toggleMemberModal(s) { document.getElementById('member-modal').classList.toggle('active', s); document.body.style.overflow = s ? 'hidden' : 'auto'; }
+        function backToList() { document.getElementById('job-list').classList.remove('hidden'); document.getElementById('job-detail').classList.add('hidden'); }
+        function closeMemberModal(e) { if(e.target.id === 'member-modal') toggleMemberModal(false); }
+    </script>
 </body>
 </html>
