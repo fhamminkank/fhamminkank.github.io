@@ -49,7 +49,7 @@
             transform: translateX(5px); 
         }
 
-       
+        /* Chat Widget */
         #chat-widget { 
             display: none; animation: slideUp 0.4s ease-out forwards; }
         @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -59,35 +59,35 @@
 
         .nav-item.active { background: white !important; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.1) !important; color: #ec4899 !important; border: 2px solid #fce7f3 !important; }
 
-       
+        /* --- PHẦN THÊM MỚI: CSS ĐẢO MÀU --- */
         body.dark-mode {
             filter: invert(1) hue-rotate(180deg);
-            background-color: #000; 
+            background-color: #000; /* Đảm bảo nền sau khi đảo sẽ thành màu tối */
         }
-        
+        /* Chống đảo màu cho ảnh và icon để giữ màu gốc */
         body.dark-mode img, 
         body.dark-mode i, 
         body.dark-mode .nav-item.active,
         body.dark-mode #chat-trigger { 
             filter: invert(1) hue-rotate(180deg); 
         }
-        
+        /* Sidebar của bản Elysium */
 .sidebar-elysium {
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
 }
 
-
+/* Kiểu chữ tiêu đề đặc trưng */
 .logo-text {
-    font-size: 1.875rem; 
-    font-weight: 900;   
-    letter-spacing: -0.05em;
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 900;    /* font-black */
+    letter-spacing: -0.05em; /* tracking-tighter */
 }
 
-
+/* Card hotline bo góc cực lớn */
 .hotline-card {
-    border-radius: 2.5rem; 
-    border: 2px solid #fce7f3; 
+    border-radius: 2.5rem; /* rounded-[2.5rem] */
+    border: 2px solid #fce7f3; /* border-pink-100 */
     background-color: #ffffff;
 }
     </style>
@@ -126,7 +126,7 @@
         </a>
     </nav>
 
-    <!-- Hotline Card -->
+    <!-- Hotline Card - Bo góc 40px theo đúng bản Elysium -->
     <div class="w-full p-6 rounded-[2.5rem] bg-white border-2 border-pink-100 shadow-sm mt-auto mb-4">
         <p class="text-[10px] font-black text-pink-500 uppercase mb-2 italic">Hỗ trợ khẩn cấp</p>
         <p class="text-lg font-black tracking-tighter">1900 8888</p>
@@ -296,7 +296,7 @@
                 <p>Chào bạn! ✨ Mình là trợ lý ảo Elysium. Bạn cần mình hỗ trợ về Vé, Thanh toán hay Lịch sự kiện ạ?</p>
             </div>
 
-           
+            <!-- Các nút hành động nhanh (Quick Actions) -->
             <div class="flex flex-wrap gap-2 pt-2 border-t border-gray-100 mt-4">
                 <button class="quick-action-btn bg-white border border-gray-200 hover:border-pink-300 hover:text-pink-500 px-3 py-2 rounded-xl text-[10px] font-bold transition-all flex items-center gap-2">
                     <i class="fa-solid fa-ticket text-pink-500"></i> Mua vé sự kiện
@@ -326,11 +326,11 @@
         </div>
     </div>
 
-   
+    <!-- Nút kích hoạt (Floating Button) -->
     <button id="chatbotToggler" class="w-16 h-16 bg-pink-500 text-white rounded-[2rem] shadow-2xl flex items-center justify-center hover:scale-110 hover:rotate-12 transition-all group overflow-hidden">
-       
+        <!-- Icon Robot mặc định -->
         <i class="fa-solid fa-robot text-2xl group-hover:scale-0 transition-transform duration-300"></i>
-        
+        <!-- Icon X khi hover hoặc mở (Dùng CSS để điều khiển nếu cần) -->
         <i class="fa-solid fa-comment-dots text-2xl absolute scale-0 group-hover:scale-110 transition-transform duration-300"></i>
     </button>
 
@@ -381,7 +381,7 @@
                         </p>
                         <p class="text-xs text-gray-500 font-bold leading-relaxed flex items-start">
                             <i class="fa-solid fa-building mt-1 mr-3 text-blue-500"></i>
-                            Tòa nhà VNU-IS, 1 Phan Tây Nhạc, Nam Từ Liêm, Hà Nội.
+                            Tòa nhà Viettel, 285 Cách Mạng Tháng Tám, Quận 10, TP. Hồ Chí Minh.
                         </p>
                     </div>
                 </div>

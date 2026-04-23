@@ -13,16 +13,16 @@
         font-family: 'Plus Jakarta Sans', sans-serif; 
         background-color: #ffffff; 
         scroll-behavior: smooth; 
-        margin: 0; 
+        margin: 0; /* Đảm bảo không bị lề trắng thừa */
     }
 
-
+    /* Ẩn scrollbar cho các thành phần cần thiết */
     .no-scrollbar::-webkit-scrollbar { 
         display: none; 
     }
     .no-scrollbar {
-        -ms-overflow-style: none; 
-        scrollbar-width: none; 
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 
     .text-gradient { 
@@ -31,18 +31,18 @@
         -webkit-text-fill-color: transparent; 
     }
     
-
+    /* Modals */
     .modal-overlay { 
         display: none; 
         position: fixed; 
         inset: 0; 
         z-index: 1000; 
-        background: rgba(0,0,0,0.85); 
+        background: rgba(0,0,0,0.85); /* Giảm độ tối một chút cho đỡ gắt */
         backdrop-filter: blur(15px); 
         align-items: center; 
         justify-content: center; 
         padding: 20px; 
-        opacity: 0; 
+        opacity: 0; /* Chuẩn bị cho animation */
     }
 
     .modal-overlay.active { 
@@ -55,25 +55,26 @@
         to { opacity: 1; transform: scale(1); } 
     }
     
-
+    /* Card Interactions */
     .card-hover { 
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         cursor: pointer; 
-        will-change: transform; 
+        will-change: transform; /* Tối ưu hiệu năng khi di chuột */
     }
 
     .card-hover:hover { 
         transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Thêm bóng cho đỡ trống layout */
     }
-
+/* --- 3D CAROUSEL CORE TEAM (BẢN HIỂN THỊ 6 NGƯỜI) --- */
     .carousel-section {
         width: 100%;
         display: flex;
         justify-content: center;
         overflow: hidden; 
-        padding: 40px 0 100px 0;
+        padding: 40px 0 100px 0; /* Tăng khoảng không để không bị cắt viền */
         cursor: grab;
+        /* 1. TĂNG PERSPECTIVE để làm "phẳng" vòng cung, các thẻ bên cạnh sẽ hướng ra mặt trước nhiều hơn */
         perspective: 2500px; 
     }
     .carousel-section:active {
@@ -82,6 +83,7 @@
 
     .team-slider {
         position: relative;
+        /* 2. THU NHỎ CHIỀU RỘNG THẺ để màn hình chứa đủ 6 thẻ ngang nhau */
         width: 160px; 
         height: 220px; 
         transform-style: preserve-3d;
@@ -92,6 +94,7 @@
     .team-item {
         position: absolute;
         inset: 0;
+        /* 3. TĂNG TRANSLATE-Z để nới rộng vòng tròn, tạo khoảng cách giữa các thẻ */
         transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) 
                    translateZ(500px); 
         backface-visibility: hidden;
@@ -99,6 +102,7 @@
         -webkit-user-drag: none;
     }
     
+    /* (Giữ nguyên phần .team-item .card-hover của bạn) */
     .team-item .card-hover {
         width: 100%;
         height: 100%;
@@ -484,7 +488,7 @@
                         </p>
                         <p class="text-xs text-gray-500 font-bold leading-relaxed flex items-start">
                             <i class="fa-solid fa-building mt-1 mr-3 text-blue-500"></i>
-                            Tòa nhà VNU-IS, 1 Phan Tây Nhạc, Nam Từ Liêm, Hà Nội.
+                            Tòa nhà Viettel, 285 Cách Mạng Tháng Tám, Quận 10, TP. Hồ Chí Minh.
                         </p>
                     </div>
                 </div>
@@ -540,7 +544,7 @@
         const teamSlider = document.getElementById('team-slider');
         const carouselSection = document.querySelector('.carousel-section');
         
-        // Biến kiểm tra click hợp lệ 
+        // Biến kiểm tra click hợp lệ (MỚI THÊM ĐỂ FIX LỖI)
         let isClickValid = true; 
 
         if(teamSlider && carouselSection) {
@@ -568,7 +572,7 @@
 
             carouselSection.addEventListener('mousedown', (e) => {
                 isDragging = true;
-                isClickValid = true; 
+                isClickValid = true; // Bắt đầu nhấn chuột -> Mặc định là Click
                 startX = e.clientX;
                 teamSlider.style.transition = 'none';
             });
@@ -577,6 +581,7 @@
                 if (!isDragging) return;
                 let moveX = e.clientX - startX;
                 
+                // Nếu di chuột quá 5px, đánh dấu là Hành động Kéo, không phải Click
                 if (Math.abs(moveX) > 5) isClickValid = false; 
                 
                 tempRotateY = currentRotateY + (moveX / 4); 
@@ -616,7 +621,7 @@
                 }
             });
 
-            // Auto Play
+            // Logic Tự Động Xoay (Auto Play)
             const degreePerItem = 360 / team.length; 
             let autoRotateTimer;
 
@@ -624,7 +629,7 @@
                 clearInterval(autoRotateTimer); 
                 autoRotateTimer = setInterval(() => {
                     currentRotateY -= degreePerItem; 
-                    tempRotateY = currentRotateY; 
+                    tempRotateY = currentRotateY; // (ĐÃ FIX: Đồng bộ góc xoay)
                     teamSlider.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1)';
                     teamSlider.style.transform = `rotateX(0deg) rotateY(${currentRotateY}deg)`;
                 }, 3000); 
@@ -661,6 +666,7 @@
         // 3. MODALS & FORMS LOGIC
         // ==========================================
         function showMemberDetail(i) {
+            // (ĐÃ FIX: Dùng biến isClickValid để kiểm tra chuẩn xác 100%)
             if(!isClickValid) return; 
 
             const m = team[i];
