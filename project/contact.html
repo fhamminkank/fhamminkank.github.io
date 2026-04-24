@@ -24,7 +24,7 @@
             display: none; 
         }
         
-        /* FAQ Accordion */
+       
         .faq-content { 
             max-height: 0; 
             overflow: hidden; 
@@ -95,7 +95,7 @@
 <body class="text-gray-800">
 
   <div class="flex min-h-screen">
- <!-- SIDEBAR THEO PHONG CÁCH ELYSIUM -->
+
 <aside class="w-72 bg-transparent sticky top-0 h-screen p-4 hidden xl:flex flex-col items-start">
     <!-- Logo Section -->
     <div class="mb-12 mt-4 ml-2">
@@ -106,7 +106,7 @@
         </a>
     </div>
 
-    <!-- Navigation -->
+  
     <nav class="space-y-2 flex-1 w-full">
         <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-6 ml-4 text-left">Hỗ trợ</p>
       
@@ -126,7 +126,7 @@
         </a>
     </nav>
 
-    <!-- Hotline Card -->
+   
     <div class="w-full p-6 rounded-[2.5rem] bg-white border-2 border-pink-100 shadow-sm mt-auto mb-4">
         <p class="text-[10px] font-black text-pink-500 uppercase mb-2 italic">Hỗ trợ khẩn cấp</p>
         <p class="text-lg font-black tracking-tighter">1900 8888</p>
@@ -213,7 +213,7 @@
                         </div>
                     </div>
 
-                    <!-- PHẦN 2: FORM CHI TIẾT -->
+                   
                     <div class="space-y-8">
                         <div class="flex items-center justify-between">
                             <h3 class="text-xl font-black uppercase italic tracking-widest text-blue-500">Gửi yêu cầu hỗ trợ</h3>
@@ -264,16 +264,16 @@
             </div>
         </main>
     </div>
-<!-- CHATBOT WIDGET -->
+
 <div class="fixed bottom-8 right-8 z-[100] flex flex-col items-end">
 
     <div id="chatbotWindow" class="hidden w-80 md:w-96 h-[550px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.2)] border-4 border-white flex-col overflow-hidden mb-6 transition-all duration-300 ease-in-out transform scale-95 origin-bottom-right">
         
-        <!-- Header: Thông tin Trợ lý -->
+        
         <div class="bg-black p-6 text-white flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <div class="relative">
-                    <!-- Avatar Bot -->
+ 
                     <div class="w-10 h-10 bg-pink-500 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-500/20">
                         <i class="fa-solid fa-robot text-lg"></i>
                     </div>
@@ -289,7 +289,7 @@
             </button>
         </div>
 
-        <!-- Body: Nội dung tin nhắn -->
+    
         <div id="chatBody" class="flex-1 p-6 overflow-y-auto bg-gray-50/50 space-y-4 no-scrollbar">
             <!-- Tin nhắn mặc định của Bot -->
             <div class="chat-message bot-message">
@@ -313,7 +313,7 @@
             </div>
         </div>
 
-        <!-- Footer: Ô nhập liệu -->
+     
         <div class="p-4 bg-white border-t border-gray-100 flex items-center space-x-2">
             <button class="w-10 h-10 text-gray-400 hover:text-black transition-colors">
                 <i class="fa-solid fa-bars text-sm"></i>
@@ -381,7 +381,7 @@
                         </p>
                         <p class="text-xs text-gray-500 font-bold leading-relaxed flex items-start">
                             <i class="fa-solid fa-building mt-1 mr-3 text-blue-500"></i>
-                            Tòa nhà VNU-IS, 1 Phan Tây Nhạc, Nam Từ Liêm, Hà Nội.
+                            Tòa nhà Viettel, 285 Cách Mạng Tháng Tám, Quận 10, TP. Hồ Chí Minh.
                         </p>
                     </div>
                 </div>
@@ -406,9 +406,7 @@
 
     <script>
 
-// ==========================================
-// TÍNH NĂNG FAQ (ACCORDION)
-// ==========================================
+
 function toggleFaq(button) {
     const item = button.parentElement;
     
@@ -426,7 +424,7 @@ function toggleFaq(button) {
     }
 }
 
-// --- HÀM TOGGLE ĐÓNG/MỞ CHAT ---
+
 const chatbotToggler = document.getElementById('chatbotToggler');
 const chatbotWindow = document.getElementById('chatbotWindow');
 const closeChatBtn = document.getElementById('closeChatBtn');
@@ -450,7 +448,7 @@ if (chatbotToggler && chatbotWindow) {
     }
 }
 
-// --- LOGIC XỬ LÝ TIN NHẮN ---
+
 const chatBody = document.getElementById('chatBody');
 const chatInput = document.getElementById('chatInput');
 const sendChatBtn = document.getElementById('sendChatBtn');
@@ -490,7 +488,7 @@ const handleChat = (forcedText = null) => {
     }, 600);
 }
 
-// --- GÁN SỰ KIỆN CHAT ---
+
 if (sendChatBtn) {
     sendChatBtn.onclick = (e) => {
         e.preventDefault();
@@ -516,9 +514,7 @@ if (quickActionBtns) {
     });
 }
 
-// ==========================================
-// XỬ LÝ FORM LIÊN HỆ 
-// ==========================================
+
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     const successModal = document.getElementById('successModal');
@@ -527,7 +523,7 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault(); 
 
-        // Kiểm tra các phần tử có tồn tại không trước khi lấy value
+    
         const nameEl = document.getElementById('fullName') || document.querySelector('input[type="text"]');
         const emailEl = document.getElementById('emailAddress') || document.querySelector('input[type="email"]');
         const subjectEl = document.getElementById('subject') || document.querySelector('select');
@@ -543,12 +539,12 @@ if (contactForm) {
             priority: "Cao"
         };
 
-        // Lưu vào LocalStorage
+   
         let contactList = JSON.parse(localStorage.getItem('contact_messages')) || [];
         contactList.push(formData);
         localStorage.setItem('contact_messages', JSON.stringify(contactList));
 
-        // Hiển thị thông báo thành công
+      
         if (successModal) {
             successModal.classList.add('active');
         } else {
